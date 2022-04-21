@@ -3,6 +3,7 @@ const { House, Profile, User } = require('../models/index')
 const { Op } = require('sequelize')
 const formatCurrency = require('../helpers/formatCurrency')
 
+
 class HouseController{
 
     static showHouses(req, res){
@@ -50,20 +51,27 @@ class HouseController{
                 }, {where: {id: userId}})
             })
             .then((data) => {
-                res.redirect(`/house/${nameFormatted}`)
+                res.redirect(`/house/`)
             })
             .catch((err) => {
                 res.send(err)
             })
     }
 
-
     static addHouse(req, res) {
-        res.render('formAdd')
+        const userId = +req.session.loginUser.id
+            User.findOne({
+                where : {
+                    id : userId
+                }
+            })
+                .then((data) => {
+                    res.render('formAdd', { data })
+                })
     }
 
     static saveHouse(req, res) {
-        
+
     }
 
 }
