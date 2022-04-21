@@ -2,7 +2,7 @@
 const { House, Profile, User } = require('../models/index')
 const { Op } = require('sequelize')
 
-class ProfileController{
+class ProfileController {
 
     static saveProfile(req, res) {
         const {firstName, lastName, dateOfBirth, gender, address} = req.body
@@ -26,6 +26,23 @@ class ProfileController{
 
     }
 
+    static profileDetail(req, res) {
+        const id = req.session.loginUser.id
+        console.log(id)
+        
+        Profile.findOne({
+            where : {
+                UserId: id
+            },
+            include: {
+                model: User
+            }
+        })
+            .then((data) => {
+                console.log(data, "<<<<<<DATA")
+                res.render('profileDetail', {data})
+            })
+    }
 }
 
 module.exports = ProfileController

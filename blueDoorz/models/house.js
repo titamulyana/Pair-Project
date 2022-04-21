@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model, Op
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class House extends Model {
@@ -18,8 +18,25 @@ module.exports = (sequelize, DataTypes) => {
       return this.name.split(" ").join("-")
     }
 
-    static formatName(value) {
-      return this.value.split(" ").join("-")
+    formatCurrency() {
+      return Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR"
+      }).format(this.price)
+    }
+
+    static searchHouse(searchByName, searchByAddress) {
+      const options = {
+        where: {},
+      }
+      if(searchByName || searchByAddress) {
+          options.where = {
+              name: {[Op.iLike]: `%${searchByName}%`},
+              address: {[Op.iLike]: `%${searchByAddress}%`}
+          }
+      }
+
+      return House.findAll(options)
     }
   }
   House.init({
@@ -34,6 +51,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'House',
+    hooks: {
+      beforeCreate(instance, options) {
+        instance.status = true
+      }
+    }
   });
   return House;
 };

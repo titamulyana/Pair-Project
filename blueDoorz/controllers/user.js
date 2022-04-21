@@ -3,7 +3,7 @@ const { House, Profile, User } = require('../models/index')
 const { Op } = require('sequelize')
 const { compare } = require('../helpers/bcryptjs')
 
-class UserController{
+class UserController {
 
     static register(req, res) {
         res.render('registerform')

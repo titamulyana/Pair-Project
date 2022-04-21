@@ -10,6 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+
+    
     static associate(models) {
       // define association here
       User.belongsTo(models.House)
@@ -71,8 +73,8 @@ module.exports = (sequelize, DataTypes) => {
     HouseId: DataTypes.INTEGER
   }, {
     hooks: {
-      beforeCreate(istance, options) {
-        istance.password = bcryptPass(istance.password)
+      beforeCreate(instance, options) {
+        instance.password = bcryptPass(instance.password)
       }
     },
     sequelize,
