@@ -1,7 +1,11 @@
 'use strict'
 const { House, Profile, User } = require('../models/index')
 const { Op } = require('sequelize')
-// const formatCurrency = require('../helpers/formatCurrency')
+
+
+
+const sendEmail = require('../helpers/nodemailer')
+
 
 
 class HouseController {
@@ -36,13 +40,17 @@ class HouseController {
     static rentHouse(req,res) {
         const idHouse = +req.params.id
         const userId = +req.session.loginUser.id
+        const email = req.session.loginUser.email
+        const username = req.session.loginUser.username
         let nameFormatted 
+        let dataHouse 
         
         House.findOne({
             where: {id: idHouse}
         })
             .then((data) =>{
                 nameFormatted = data.formattedName
+                dataHouse = data
                 return House.decrement('rooms', {
                     where: {id: idHouse}
                 })
@@ -53,7 +61,8 @@ class HouseController {
                 }, {where: {id: userId}})
             })
             .then((data) => {
-                res.redirect(`/house/`)
+                // sendEmail(email, username)
+                res.render('notif', {dataHouse})
             })
             .catch((err) => {
                 res.send(err)

@@ -38,7 +38,8 @@ class UserController {
                     req.session.loginUser = {
                         username, 
                         id: data.id,
-                        role: data.role
+                        role: data.role,
+                        email: data.email
                     }
                     
                     res.redirect('/house')
