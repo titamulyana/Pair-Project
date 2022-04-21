@@ -28,7 +28,8 @@ class UserController {
     }
 
     static login(req, res) {
-        res.render('login', {})
+        const errors = req.query.errors
+        res.render('login', {errors})
     }
 
     static loginpost(req, res) {
@@ -52,10 +53,12 @@ class UserController {
             
                     res.redirect('/house')
                 } else {
-                    throw errors.push('password wrong')
+                    errors.push('password wrong')
+                    res.redirect(`/login?errors=${errors}`)
                 }
             } else {
-                throw errors.push('user not found')
+                errors.push('user not found')
+                res.redirect(`/login?errors=${errors}`)
             }
         })
         .catch((err) => {
