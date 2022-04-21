@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Warsaw Fox Residence",
+        "address": "Tebet, Jakarta Selatan",
+        "rooms": 5,
+        "status": true,
+        "description": "Kost khusus wanita di tengah kota Jakarta Selatan. Fasilitas lengkap, FREE wifi, dan cleaning, lokasi sangat strategis dekat dengan Pasar, sekolah, cafe, resto, angkutan umum, stasiun , bank dll",
+        "imageURL": "https://papikost.com/images/property/565_138457613.jpeg",
+        "price": "2700000",
+        "gender": "female"
+    },
+    {
+        "name": "Stockholm Fox Residence",
+        "address": "Kelapa Gading, Jakarta Utara",
+        "rooms": 2,
+        "status": true,
+        "description": "Kost Baru Super Mewah Utk Pria/Wanita, Harga mulai dari 2.1jt/bulan tersedia fasilitas di setiap kamar: AC, TV LED, Kamar Mandi Dalam dgn Water Heater Ariston (Air Panas/Dingin), Lemari Baju, Cermin dan Jendela Setiap Kamar. FASILITAS BARU & LENGKAP",
+        "imageURL": "https://papikost.com/images/property/79_213907454.jpg",
+        "price": "2100000",
+        "gender": "mixed"
+    },
+    {
+        "name": "Rome Fox Residence",
+        "address": "Kemanggisan, Jakarta Barat",
+        "rooms": 5,
+        "status": true,
+        "description": "Kos-kosan Nyaman.",
+        "imageURL": "https://papikost.com/images/property/372_198689834.jpg",
+        "price": "1800000",
+        "gender": "male"
+    },
+    {
+        "name": "Quimper Fox Residence",
+        "address": "Cibubur, Bekasi",
+        "rooms": 8,
+        "status": true,
+        "description": "Sudah termasuk (gratis) fasilitas: Listrik AC Air, Kamar mandi dalam dengan closet duduk, Tempat tidur spring bed nyaman, Meja kerja Lemari Furniture lengkap, Dilengkapi juga ada kompor, kulkas dan kitchen sink untuk pemakaian bersama, Akses internet wifi free unlimited untuk bekerja online, youtuber dan streaming video high speed 24 jam, Parking area luas",
+        "imageURL": "https://papikost.com/images/property/679_288737452.jpg",
+        "price": "1600000",
+        "gender": "mixed"
+    },
+    {
+        "name": "Paris Fox Residence",
+        "address": "Pondok Aren, Tangerang Selatan",
+        "rooms": 1,
+        "status": true,
+        "description": "Kost Putra di Pondok Aren dengan fasilitas: AC, Wi-Fi, Token pribadi, Kamar mandi dalam, Ruang tamu dan dapur",
+        "imageURL": "https://papikost.com/images/property/708_893437188.jpg",
+        "price": "1000000",
+        "gender": "male"
+    },
+    {
+        "name": "Oslo Fox Residence",
+        "address": "Sawah Besar, Jakarta Pusat",
+        "rooms": 4,
+        "status": true,
+        "description": "FASILITAS SUPER LENGKAP:Lemari 2 pintu, Spring Bed sekelas Hotel Bintang 3, Token tiap Kamar, FULL AC, Water heater, Closed duduk, Wastafel, Kulkas Sharp untuk bersama, High Speed Wifi 50Mbps with Mikrotik Sistem (hotspot login seperti hotel), TV 24 Inch, Dapur Bersama + 1 Dispenser Hot & Cold, CCTV 24 jam",
+        "imageURL": "https://papikost.com/images/property/501_694721484.jpeg",
+        "price": "1600000",
+        "gender": "female"
+    }
+]
