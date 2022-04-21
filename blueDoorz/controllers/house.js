@@ -52,7 +52,7 @@ class HouseController {
 
         let nameFormatted 
         let dataHouse 
-        
+         
         House.findOne({
             where: {id: idHouse}
         })
