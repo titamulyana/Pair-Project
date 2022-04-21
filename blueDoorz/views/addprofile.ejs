@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <h2>
+            <a href="/">Home</a> || <a href="">Login</a>
+        </h2>
+    </nav>
+    <h3>Create your Profile</h3><br>
+    <form action="/saveprofile" method="POST">
+        First Name : <br>
+        <input type="text" name="firstName"> <br>
+        Last Name : <br> 
+        <input type="text" name="lastName"> <br>
+        Birth Day : <br>
+        <input type="date" name="dateOfBirth"><br>
+        Gender : <br>
+        <select name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select><br>
+        Address : <br>
+        <input type="text" name="address"><br>
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>
