@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
     get formattedName() {
       return this.name.split(" ").join("-")
     }
+
+    static formatName(value) {
+      return this.value.split(" ").join("-")
+    }
   }
   House.init({
     name: DataTypes.STRING,

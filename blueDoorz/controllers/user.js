@@ -9,7 +9,7 @@ class UserController{
         res.render('registerform')
     }
 
-    static  saveRegister(req, res) {
+    static saveRegister(req, res) {
         const {username, password, email, role} = req.body
         const inputUser = {username, password, email, role}
 
@@ -40,7 +40,7 @@ class UserController{
                         id: data.id
                     }
                     
-                    res.redirect('/')
+                    res.redirect('/house')
                 } else {
                     throw errors.push('password worng')
                 }

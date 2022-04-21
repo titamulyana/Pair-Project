@@ -31,7 +31,39 @@ class HouseController{
     }
 
     static rentHouse(req,res) {
-        console.log(req.body)
+        const idHouse = +req.params.id
+        const userId = +req.session.loginUser.id
+        let nameFormatted 
+        
+        House.findOne({
+            where: {id: idHouse}
+        })
+            .then((data) =>{
+                nameFormatted = data.formattedName
+                return House.decrement('rooms', {
+                    where: {id: idHouse}
+                })
+            })
+            .then((data) => {
+                return User.update({
+                    HouseId: idHouse,
+                }, {where: {id: userId}})
+            })
+            .then((data) => {
+                res.redirect(`/house/${nameFormatted}`)
+            })
+            .catch((err) => {
+                res.send(err)
+            })
+    }
+
+
+    static addHouse(req, res) {
+        res.render('formAdd')
+    }
+
+    static saveHouse(req, res) {
+        
     }
 
 }
