@@ -69,11 +69,15 @@
         <li><a href="/house">Home</a></li>
         <li><a href="/house/add">Add House</a></li>
         <li><a href="/profile/detail">Profile Detail</a></li>
+        <li style="float: right;"><a href="/logout">Logout</a></li>
     </ul><br>
+    
     <form action="/house/" method="get">
-        <input type="text" placeholder="Search by Name" style="width: 64%;" name="searchByName">
-        <input type="text" placeholder="Search by Location" style="width: 24%;" name="searchByAddress">
-        <input type="submit" class="btn btn-primary btn-sm" value="Search">
+        <div class="container-fluid">
+            <input type="text" placeholder="Search by Name" style="width: 64%;" name="searchByName">
+            <input type="text" placeholder="Search by Location" style="width: 24%;" name="searchByAddress">
+            <input type="submit" class="btn btn-primary btn-sm" value="Search">
+        </div>
     </form>
     <hr>
 
@@ -86,8 +90,8 @@
                         <div class="card-body">
                             <h5 class="card-title"><%= ele.name %></h5>
                             <strong><p class="card-text"><%= `${ele.formatCurrency()} / bulan`  %></p></strong>
-
-                            <a href="/house/<%= ele.id %>/delete"><button>delete</button></a>
+                            <p class="card-text"><%= ele.address  %></p>
+                            <a href="/house/<%= ele.id %>/delete"><button class="btn btn-danger" style="float: right;">Delete</button></a>
                         </div>
                     </div>
                 </div>

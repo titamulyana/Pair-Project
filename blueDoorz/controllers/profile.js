@@ -28,7 +28,6 @@ class ProfileController {
 
     static profileDetail(req, res) {
         const id = req.session.loginUser.id
-        console.log(id)
         
         Profile.findOne({
             where : {
@@ -41,21 +40,21 @@ class ProfileController {
             .then((data) => {
                 res.render('profileDetail', {data})
             })
+            .catch((err) => {
+                res.send(err)
+            })
     }
 
     static edit(req, res) {
         const id = +req.params.id
+
         Profile
         .findOne({
             where: { id : id }
         })
         .then((data) => {
-            console.log(data);
             res.render('editprofile', {data})
         }) 
-        .catch((err) => {
-            res.send(err)
-        })
     }
 
     static editpost(req, res) {

@@ -23,11 +23,13 @@ module.exports = (sequelize, DataTypes) => {
       type : DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: {
-          msg: `username is required`
-        },
+        notNull: true,
         notEmpty: {
-          msg: `username is required`
+          msg: `Username is required`
+        },
+        len: {
+          args: [6,12],
+          msg: `Username must be between 6 and 12 characters`
         }
       }
     },
@@ -35,11 +37,13 @@ module.exports = (sequelize, DataTypes) => {
       type : DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: {
-          msg: `password is required`
-        },
+        notNull: true,
         notEmpty: {
-          msg: `password is required`
+          msg: `Password is required`
+        },
+        len: {
+          args: [6,12],
+          msg: `Password must be between 6 and 12 characters`
         }
       }
     },
@@ -47,14 +51,12 @@ module.exports = (sequelize, DataTypes) => {
       type : DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: {
-          msg: `email is required`
-        },
+        notNull: true,
         notEmpty: {
-          msg: `email is required`
+          msg: `Email is required`
         },
         isEmail: {
-          msg: `your input must email`
+          msg: `Your input must be email`
         }
       }
     },
@@ -62,11 +64,9 @@ module.exports = (sequelize, DataTypes) => {
       type : DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: {
-          msg: `name is required`
-        },
+        notNull: true,
         notEmpty: {
-          msg: `name is required`
+          msg: `Role is required`
         }
       }
     },

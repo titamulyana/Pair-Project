@@ -1,19 +1,19 @@
 'use strict'
 const { House, Profile, User } = require('../models/index')
 const { Op } = require('sequelize')
-
-
-
-const sendEmail = require('../helpers/nodemailer')
-
-
+const {sendEmail, komplain} = require('../helpers/nodemailer')
 
 class HouseController {
     
-    static showHouses(req, res){
+    static showHouses(req, res) {
         const { searchByName, searchByAddress} = req.query
-        
-        House.searchHouse(searchByName, searchByAddress, {Op})
+
+        House.update({
+            status: false,
+        }, {where: {rooms: 0}})
+            .then(() => {
+                return House.searchHouse(searchByName, searchByAddress)
+            })
             .then((data) => {
                 res.render('house', {data})
             })
@@ -25,12 +25,19 @@ class HouseController {
     static houseDetail(req, res){
         const {formattedName} = req.params
         let normalizedName = formattedName.split("-").join(" ")
-
+        const userId = +req.session.loginUser.id
+        let data
         House.findOne({
             where: {name: normalizedName}
         })
-            .then((data) => {
-                res.render('houseDetail', {data, formatCurrency})
+            .then((userData) => {
+                data = userData
+                return User.findOne({
+                    where: {id: userId}
+                })
+            })
+            .then((userData) => {
+                res.render('houseDetail', {data, userData})
             })
             .catch((err) => {
                 res.send(err)
@@ -40,11 +47,12 @@ class HouseController {
     static rentHouse(req,res) {
         const idHouse = +req.params.id
         const userId = +req.session.loginUser.id
-        const email = req.session.loginUser.email
         const username = req.session.loginUser.username
+        const email = req.session.loginUser.email
+
         let nameFormatted 
         let dataHouse 
-        
+         
         House.findOne({
             where: {id: idHouse}
         })
@@ -60,8 +68,8 @@ class HouseController {
                     HouseId: idHouse,
                 }, {where: {id: userId}})
             })
-            .then((data) => {
-                // sendEmail(email, username)
+            .then(() => {
+                sendEmail(email, username)
                 res.render('notif', {dataHouse})
             })
             .catch((err) => {
@@ -70,7 +78,9 @@ class HouseController {
     }
 
     static addHouse(req, res) {
-        res.render('formAdd')
+        let errors = req.query.errors
+
+        res.render('formAdd', {errors})
     }
 
     static saveHouse(req, res) {
@@ -90,7 +100,12 @@ class HouseController {
                 res.redirect('/house')
             })
             .catch((err) => {
-                res.send(err)
+                if(err.name === "SequelizeValidationError") {
+                    let errMessage = err.errors.map((ele) => {
+                        return ele.message
+                    })
+                    res.redirect(`/house/add?errors=${errMessage}`)
+                }
             })
     }
 
@@ -98,7 +113,8 @@ class HouseController {
         const id = req.params.id
         House
         .destroy({
-            where: { id : id }
+            where: { id : id,
+            }
         })
         .then(() => {
             res.redirect('/house')
@@ -106,6 +122,17 @@ class HouseController {
         .catch((err) => {
             res.send(err)
         })
+    }
+
+    static komplain(req, res) {
+        res.render('komplain')
+    }
+
+    static saveKomplain(req, res) {
+        const pesanKomplain = req.body.komplain
+        komplain(pesanKomplain)
+
+        res.redirect('/house')
     }
 }
 

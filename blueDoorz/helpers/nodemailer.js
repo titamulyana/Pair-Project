@@ -23,4 +23,26 @@ function sendEmail(sendTo, name){
     });
 }
 
-module.exports = sendEmail;
+function komplain(message){
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'joindonghacktiv8@gmail.com',
+            pass: 'Pohodeu1'
+        }
+    });
+    
+    var mailOptions = {
+        from: 'joindonghacktiv8@gmail.com',
+        to: "",
+        subject: 'Komplain',
+        text: `Kamu mendapatkan komplain dari salah satu user, yaitu : ${message}`
+    };
+    
+    transporter.sendMail(mailOptions, (err, info) => {
+        if (err) throw err;
+        console.log('Email sent: ' + info.response);
+    });
+}
+
+module.exports = {sendEmail, komplain};
