@@ -49,23 +49,27 @@ class UserController {
                         role: data.role,
                         email: data.email
                     }
-                    
+            
                     res.redirect('/house')
                 } else {
-                    throw errors.push('password worng')
+                    throw errors.push('password wrong')
                 }
             } else {
                 throw errors.push('user not found')
             }
         })
         .catch((err) => {
-            res.send(err)
-        })
+            res.send(errors)
+        })  
     }
 
-    static logout(res, req) {
-        console.log(req.session)
-        // res.redirect('/login'    
+    static logout(req, res) {
+        req.session.destroy(err => {
+            if(err) {
+                return res.send(err)
+            }
+            res.redirect('/login')
+        })    
     }
 }
 

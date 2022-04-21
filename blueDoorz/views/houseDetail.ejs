@@ -88,7 +88,15 @@
                             </p>
                             <p class="card-text"></p>
                             <p class="card-text"><%= data.description %></p>
-                            <a href="/house/<%= data.id %>/rent"><button type="submit" formmethod="post" class="btn btn-primary">Rent Now!</button></a>
+
+                            <% if (!userData.HouseId) { %>
+                                <a href="/house/<%= data.id %>/rent"><button type="submit" formmethod="post" class="btn btn-primary">Rent Now!</button></a>
+                            <% } else {%>
+                            <% if (data.id === userData.HouseId) { %>
+                                <a href="/komplain"><button type="submit" formmethod="post" class="btn btn-primary">Komplain</button></a>
+                            <% } %>
+                            <%}%>
+                            
                         </div>
                     </div>
                 </div>
