@@ -14,7 +14,6 @@ router.get('/login', UserController.login)
 router.post('/login', UserController.loginpost)
 router.get('logout', )
 router.get('/', (req, res) => {
-    console.log(req.session.loginUser);
     res.render('home', {login: req.session.loginUser})
 })
 
