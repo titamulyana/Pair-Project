@@ -18,6 +18,12 @@ module.exports = (sequelize, DataTypes) => {
       return this.name.split(" ").join("-")
     }
 
+    get genderIndo() {
+      if (this.gender === "male") return "Laki-laki"
+      else if (this.gender === "female") return "Perempuan"
+      else return "Campuran"
+    }
+
     formatCurrency() {
       return Intl.NumberFormat("id-ID", {
         style: "currency",
@@ -27,10 +33,12 @@ module.exports = (sequelize, DataTypes) => {
 
     static searchHouse(searchByName, searchByAddress) {
       const options = {
-        where: {},
+        where: {status: true}
       }
+
       if(searchByName || searchByAddress) {
           options.where = {
+            ...options.where,
               name: {[Op.iLike]: `%${searchByName}%`},
               address: {[Op.iLike]: `%${searchByAddress}%`}
           }
@@ -40,14 +48,77 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   House.init({
-    name: DataTypes.STRING,
-    address: DataTypes.STRING,
-    rooms: DataTypes.INTEGER,
+    name: {
+      type : DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: {
+          msg: `Name is required`
+        }
+      }
+    },
+    address: {
+      type : DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: {
+          msg: `Address is required`
+        }
+      }
+    },
+    rooms: {
+      type : DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: {
+          msg: `Room Amount is required`
+        }
+      }
+    },
     status: DataTypes.BOOLEAN,
-    description: DataTypes.TEXT,
-    imageURL: DataTypes.STRING,
-    price: DataTypes.INTEGER,
-    gender: DataTypes.STRING,
+    description: {
+      type : DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: {
+          msg: `Description is required`
+        }
+      }
+    },
+    imageURL: {
+      type : DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: {
+          msg: `Image is required`
+        }
+      }
+    },
+    price: {
+      type : DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: {
+          msg: `Price is required`
+        }
+      }
+    },
+    gender: {
+      type : DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: {
+          msg: `Gender is required`
+        }
+      }
+    },
   }, {
     sequelize,
     modelName: 'House',

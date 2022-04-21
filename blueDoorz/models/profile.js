@@ -28,11 +28,9 @@ module.exports = (sequelize, DataTypes) => {
       type : DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: {
-          msg: `first name is required`
-        },
+        notNull: true,
         notEmpty: {
-          msg: `first name is required`
+          msg: `First name is required`
         }
       }
     },
@@ -40,11 +38,9 @@ module.exports = (sequelize, DataTypes) => {
       type : DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: {
-          msg: `name is required`
-        },
+        notNull: true,
         notEmpty: {
-          msg: `name is required`
+          msg: `Name is required`
         }
       }
     },
@@ -52,11 +48,9 @@ module.exports = (sequelize, DataTypes) => {
       type : DataTypes.DATE,
       allowNull: false,
       validate: {
-        notNull: {
-          msg: `date is required`
-        },
+        notNull: true,
         notEmpty: {
-          msg: `date is required`
+          msg: `Date is required`
         }
       }
     },
@@ -64,11 +58,9 @@ module.exports = (sequelize, DataTypes) => {
       type : DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: {
-          msg: `gender is required`
-        },
+        notNull: true,
         notEmpty: {
-          msg: `gender is required`
+          msg: `Gender is required`
         }
       }
     },
@@ -76,14 +68,13 @@ module.exports = (sequelize, DataTypes) => {
       type : DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: {
-          msg: `address is required`
-        },
+        notNull: true,
         notEmpty: {
-          msg: `address is required`
+          msg: `Address is required`
         }
       }
-    }
+    },
+    UserId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Profile',

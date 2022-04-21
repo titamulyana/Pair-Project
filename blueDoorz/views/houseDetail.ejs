@@ -66,19 +66,24 @@
     </style>
   </head>
   <body>
-
+    <ul>
+        <li><a href="/house">Home</a></li>
+        <li><a href="/house/add">Add House</a></li>
+        <li><a href="/profile/detail">Profile Detail</a></li>
+        <li style="float: right;"><a href="/logout">Logout</a></li>
+    </ul><br>
     <div class="container" >
         <div class="row gy-3">
                 <div class="col-12 col-md-6" >
                     <div class="card h-70">
                         <img src="<%= data.imageURL %>"  class="card-img-top " alt="Photo of Arts">
                         <div class="card-body">
-                            <h4 style="font-family:Arial, Helvetica, sans-serif ;">Kost <%= data.gender %> </h4>
+                            <h4 style="font-family:Arial, Helvetica, sans-serif ;">Kost <%= data.genderIndo %> </h4>
                             <h5 class="card-title"><%= data.name %></h5>
                             <p class="card-text " >
                                 <div style="float:right; color: green;">Jumlah room tersedia: <%= data.rooms %></div>
                                 <div style="color:lightsalmon;">
-                                    <%= `${formatCurrency(data.price)} / bulan` %>
+                                    <%= `${data.formatCurrency()} / bulan` %>
                                 </div>      
                             </p>
                             <p class="card-text"></p>

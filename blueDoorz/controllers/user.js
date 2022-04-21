@@ -6,7 +6,8 @@ const { compare } = require('../helpers/bcryptjs')
 class UserController {
 
     static register(req, res) {
-        res.render('registerform')
+        let errors = req.query.errors
+        res.render('registerform', {errors})
     }
 
     static saveRegister(req, res) {
@@ -16,11 +17,18 @@ class UserController {
         User
         .create(inputUser)
         .then(() => res.render('addprofile'))
-        .catch((err) => res.send(err))
+        .catch((err) => {
+            if(err.name === "SequelizeValidationError") {
+                let errMessage = err.errors.map((ele) => {
+                    return ele.message
+                })
+                res.redirect(`/register?errors=${errMessage}`)
+            }
+        })
     }
 
     static login(req, res) {
-        res.render('login')
+        res.render('login', {})
     }
 
     static loginpost(req, res) {
@@ -51,13 +59,13 @@ class UserController {
             }
         })
         .catch((err) => {
-            res.send(errors)
+            res.send(err)
         })
     }
 
     static logout(res, req) {
-        req.session.destroy()
-        res.redirect('/login')
+        console.log(req.session)
+        // res.redirect('/login'    
     }
 }
 

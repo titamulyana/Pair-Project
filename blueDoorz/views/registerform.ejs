@@ -12,6 +12,14 @@
             <a href="/">Home</a> || <a href="/login">Login</a>
         </h2>
     </nav>
+        <div style="text-align: center;">
+            <% if(errors) { %>
+            <% errors = errors.split(',') %> 
+            <% errors.forEach(ele => { %> 
+                <p style="color:red"> <%= ele %> </p>
+            <% }) %>
+            <% } %>
+        </div>
         <form action="/register" method="POST">
             Username : <br>
             <input type="text" name="username"><br>

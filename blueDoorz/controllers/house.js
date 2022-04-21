@@ -2,18 +2,12 @@
 const { House, Profile, User } = require('../models/index')
 const { Op } = require('sequelize')
 
-
-
-const sendEmail = require('../helpers/nodemailer')
-
-
-
 class HouseController {
     
     static showHouses(req, res){
         const { searchByName, searchByAddress} = req.query
 
-        House.searchHouse(searchByName, searchByAddress, {Op})
+        House.searchHouse(searchByName, searchByAddress)
             .then((data) => {
                 res.render('house', {data})
             })
@@ -30,7 +24,7 @@ class HouseController {
             where: {name: normalizedName}
         })
             .then((data) => {
-                res.render('houseDetail', {data, formatCurrency})
+                res.render('houseDetail', {data})
             })
             .catch((err) => {
                 res.send(err)
@@ -40,8 +34,6 @@ class HouseController {
     static rentHouse(req,res) {
         const idHouse = +req.params.id
         const userId = +req.session.loginUser.id
-        const email = req.session.loginUser.email
-        const username = req.session.loginUser.username
         let nameFormatted 
         let dataHouse 
         
@@ -61,7 +53,6 @@ class HouseController {
                 }, {where: {id: userId}})
             })
             .then((data) => {
-                // sendEmail(email, username)
                 res.render('notif', {dataHouse})
             })
             .catch((err) => {
@@ -70,7 +61,9 @@ class HouseController {
     }
 
     static addHouse(req, res) {
-        res.render('formAdd')
+        let errors = req.query.errors
+
+        res.render('formAdd', {errors})
     }
 
     static saveHouse(req, res) {
@@ -90,7 +83,12 @@ class HouseController {
                 res.redirect('/house')
             })
             .catch((err) => {
-                res.send(err)
+                if(err.name === "SequelizeValidationError") {
+                    let errMessage = err.errors.map((ele) => {
+                        return ele.message
+                    })
+                    res.redirect(`/house/add?errors=${errMessage}`)
+                }
             })
     }
 }

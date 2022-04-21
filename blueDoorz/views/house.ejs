@@ -69,6 +69,7 @@
         <li><a href="/house">Home</a></li>
         <li><a href="/house/add">Add House</a></li>
         <li><a href="/profile/detail">Profile Detail</a></li>
+        <li style="float: right;"><a href="/logout">Logout</a></li>
     </ul><br>
     <form action="/house/" method="get">
         <input type="text" placeholder="Search by Name" style="width: 64%;" name="searchByName">
@@ -86,6 +87,7 @@
                         <div class="card-body">
                             <h5 class="card-title"><%= ele.name %></h5>
                             <strong><p class="card-text"><%= `${ele.formatCurrency()} / bulan`  %></p></strong>
+                            <p class="card-text"><%= ele.address  %></p>
                         </div>
                     </div>
                 </div>
