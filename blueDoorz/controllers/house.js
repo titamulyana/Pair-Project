@@ -1,15 +1,17 @@
 'use strict'
 const { House, Profile, User } = require('../models/index')
 const { Op } = require('sequelize')
-const formatCurrency = require('../helpers/formatCurrency')
+// const formatCurrency = require('../helpers/formatCurrency')
 
 
-class HouseController{
-
+class HouseController {
+    
     static showHouses(req, res){
-        House.findAll()
+        const { searchByName, searchByAddress} = req.query
+
+        House.searchHouse(searchByName, searchByAddress, {Op})
             .then((data) => {
-                res.render('house', {data, formatCurrency})
+                res.render('house', {data})
             })
             .catch((err) => {
                 res.send(err)
@@ -59,21 +61,29 @@ class HouseController{
     }
 
     static addHouse(req, res) {
-        const userId = +req.session.loginUser.id
-            User.findOne({
-                where : {
-                    id : userId
-                }
-            })
-                .then((data) => {
-                    res.render('formAdd', { data })
-                })
+        res.render('formAdd')
     }
 
     static saveHouse(req, res) {
+        const userId = +req.session.loginUser.id
+        const {name, address, imageURL, rooms, price, gender, description, status} = req.body
+        const input = {name, address, imageURL, rooms, price, gender, description, status}
+        let idHouse
 
+        House.create(input)
+            .then((data) => {
+                idHouse = data.id
+                return User.update({
+                    HouseId: idHouse,
+                }, {where: {id: userId}})
+            })
+            .then(() => {
+                res.redirect('/house')
+            })
+            .catch((err) => {
+                res.send(err)
+            })
     }
-
 }
 
 module.exports = HouseController
