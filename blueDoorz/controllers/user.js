@@ -37,7 +37,8 @@ class UserController{
                 if(compare(password, data.password) === true) {
                     req.session.loginUser = {
                         username, 
-                        id: data.id
+                        id: data.id,
+                        role: data.role
                     }
                     
                     res.redirect('/house')
