@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       House.hasMany(models.User)
     }
+
+    get formattedName() {
+      return this.name.split(" ").join("-")
+    }
   }
   House.init({
     name: DataTypes.STRING,
@@ -21,7 +25,8 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.BOOLEAN,
     description: DataTypes.TEXT,
     imageURL: DataTypes.STRING,
-    price: DataTypes.INTEGER
+    price: DataTypes.INTEGER,
+    gender: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'House',
