@@ -12,7 +12,7 @@ class HouseController {
     
     static showHouses(req, res){
         const { searchByName, searchByAddress} = req.query
-
+        
         House.searchHouse(searchByName, searchByAddress, {Op})
             .then((data) => {
                 res.render('house', {data})
@@ -92,6 +92,20 @@ class HouseController {
             .catch((err) => {
                 res.send(err)
             })
+    }
+
+    static delete(req, res) {
+        const id = req.params.id
+        House
+        .destroy({
+            where: { id : id }
+        })
+        .then(() => {
+            res.redirect('/house')
+        })
+        .catch((err) => {
+            res.send(err)
+        })
     }
 }
 

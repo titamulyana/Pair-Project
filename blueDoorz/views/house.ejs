@@ -86,6 +86,8 @@
                         <div class="card-body">
                             <h5 class="card-title"><%= ele.name %></h5>
                             <strong><p class="card-text"><%= `${ele.formatCurrency()} / bulan`  %></p></strong>
+
+                            <a href="/house/<%= ele.id %>/delete"><button>delete</button></a>
                         </div>
                     </div>
                 </div>

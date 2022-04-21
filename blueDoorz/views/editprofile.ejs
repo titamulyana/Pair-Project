@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit profile</title>
+</head>
+<body>
+    <div>
+        <form action="/profile/<%= data.id %>/edit" method="POST">
+            <h1>Edit Profile</h1>
+            first name : <br>
+            <input type="text" name="firstName" value="<%= data.firstName %>"><br>
+            last name : <br>
+            <input type="text" name="lastName" value="<%= data.lastName %>"><br>
+            birth day : <br>
+            <input type="date" name="dateOfBirth" value="<%= data.formatDate %>"><br>
+            gender : <br>
+            <select name="gender" >
+                <% ['female', 'male'].forEach(el => {%>
+                    <% if(el === data.gender ) {%>
+                        <option selected value="<%= el %>"><%= el %> </option>
+                        <%} else {%>
+                            <option value="<%= el %>"><%= el %></option>
+                        <%}%> 
+                <%}) %> 
+            </select><br>
+            Address : <br>
+            <input type="text" name="address" value="<%= data.address %>"><br>
+            <button type="submit">edit</button>
+        </form>
+
+    </div>
+</body>
+</html>

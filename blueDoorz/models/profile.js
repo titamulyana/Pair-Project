@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       return (new Date().getFullYear() - this.dateOfBirth.getFullYear())
     }
 
+    get formatDate() {
+      return this.dateOfBirth.toISOString().substring(10,0)
+    }
+
     fullName() {
       return `${this.firstName} ${this.lastName}`
     }
